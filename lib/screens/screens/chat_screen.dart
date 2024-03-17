@@ -3,7 +3,9 @@ import 'package:chat_appilication/until/list_images.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreens extends StatefulWidget {
-  const ChatScreens({super.key});
+  const ChatScreens({
+    super.key,
+  });
 
   @override
   State<ChatScreens> createState() => _ChatScreensState();
@@ -20,7 +22,8 @@ class _ChatScreensState extends State<ChatScreens> {
           title: Row(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage("${imageStroy}"),
+                backgroundColor: Colors.red,
+                backgroundImage: AssetImage(""),
               ),
               wSpace(),
               Column(

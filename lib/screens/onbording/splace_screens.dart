@@ -1,30 +1,65 @@
 import 'dart:async';
 
+import 'package:chat_appilication/screens/onbording/log_in.dart';
+import 'package:chat_appilication/screens/screens/home_page.dart';
 import 'package:chat_appilication/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'onbording_screens.dart';
 
-class SplaceScreens extends StatefulWidget {
-  const SplaceScreens({super.key});
+class SplashScreens extends StatefulWidget {
+  const SplashScreens({super.key});
 
   @override
-  State<SplaceScreens> createState() => _SplaceScreensState();
+  State<SplashScreens> createState() => SplashScreensState();
 }
 
-class _SplaceScreensState extends State<SplaceScreens> {
+class SplashScreensState extends State<SplashScreens> {
+  static const String LoginKey = "Login";
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OnbordingScreen(),
-          ));
+    whereToGo();
+  }
+
+  /// sherPref
+  void whereToGo() async {
+    var pref = await SharedPreferences.getInstance();
+
+    var isLogin = pref.getBool(LoginKey);
+    Timer(const Duration(seconds: 2), () async {
+      // Widget navigateToPage = LoginScreen();
+
+      if (isLogin != null) {
+        if (isLogin) {
+          //when true
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ));
+        } else {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LogInScreen(),
+              ));
+          // navigateToPage = SignUpScreen();
+        }
+      } else {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const OnbordingScreen(),
+            ));
+        // navigateToPage = SignUpScreen();
+      }
     });
   }
+
+  //// shar pref.
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +69,11 @@ class _SplaceScreensState extends State<SplaceScreens> {
         children: [
           Image.asset(
             "assets/images/c.png",
-            color: Color(0xff24786D),
+            color: const Color(0xff24786D),
             scale: 10,
           ),
           hSpace(),
-          Center(
+          const Center(
             child: Text(
               'Chatbox',
               style: TextStyle(

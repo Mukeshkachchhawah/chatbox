@@ -75,80 +75,70 @@ class _BottomBarPagesState extends State<BottomBarPages> {
       context: context,
       useSafeArea: true,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          // contentPadding: EdgeInsets.only(bottom: 100),
-          alignment: Alignment.bottomCenter,
-          content: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Card(
-                  child: Container(
-                      height: 250,
-                      // width: 300,
-                      decoration: BoxDecoration(
-                          color: Color(0xffffffff),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        children: [
-                          // for (var item in [1, 2, 3])
-                          //   ListTile(
-                          //     leading: Icon(Icons.chat),
-                          //     title: Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       mainAxisSize: MainAxisSize.min,
-                          //       children: [
-                          //         Text("New Chat"),
-                          //         Text('Send a message to your contact')
-                          //       ],
-                          //     ),
-                          //   )
-                          CustomListTile(
-                              "New Chat",
-                              "Send a message to your contact",
-                              Icon(Icons.chat_rounded)),
-                          CustomListTile(
-                              "Add Contact",
-                              "Add a contact to be able to send messages",
-                              Icon(Icons.contact_page_outlined)),
-                          CustomListTile(
-                              "New Community",
-                              "Join the community around you",
-                              Icon(Icons.group_sharp))
-                        ],
-                      )),
-                ),
-
-                //  OutlinedButton(onPressed: () {}, child: Text("Cancel")),
-                Container(
-                    height: 40,
-                    width: 130,
-                    alignment: Alignment.bottomCenter,
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Card(
+                child: Container(
+                    height: 250,
+                    // width: 300,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.black,
-                    ),
-                    child: Center(
+                        color: Color(0xffffffff),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: [
+                        CustomListTile(
+                            "New Chat",
+                            "Send a message to your contact",
+                            Icon(Icons.chat_rounded), () {
+                          /// navigat in new Chat
+                        }),
+                        CustomListTile(
+                            "Add Contact",
+                            "Add a contact to be able to send messages",
+                            Icon(Icons.contact_page_outlined), () {
+                          /// navigat new contact
+                        }),
+                        CustomListTile(
+                            "New Community",
+                            "Join the community around you",
+                            Icon(Icons.group_sharp), () {
+                          /// navigat new community
+                          
+                        })
+                      ],
+                    )),
+              ),
+              hSpace(),
+              Container(
+                  height: 40,
+                  width: 150,
+                  //  color: Colors.white,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Text(
                         "Cancel",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    )),
-              ],
-            ),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ))),
+            ],
           ),
         );
       },
     );
   }
 
-  CustomListTile(String text, String text2, Icon icons) {
+  CustomListTile(String text, String text2, Icon icons, VoidCallback ontapped) {
     return ListTile(
+      onTap: ontapped,
       leading: icons,
       title: Text(
         text,

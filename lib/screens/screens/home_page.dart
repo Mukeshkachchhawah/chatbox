@@ -4,8 +4,7 @@ import 'package:chat_appilication/until/list_images.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  late Widget mWidget;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,12 +104,13 @@ class HomePage extends StatelessWidget {
               children: [
                 Text("02:30 PM"),
                 hSpace(mheight: 10.0),
-                CircleAvatar(
-                  radius: 14,
-                  child: Center(
-                    child: Text("3"),
-                  ),
-                )
+                Container(
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(100)),
+                    child: Center(child: Text("3")))
               ],
             ),
           ),

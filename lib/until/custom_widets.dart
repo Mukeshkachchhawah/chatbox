@@ -34,12 +34,14 @@ class SocialButton extends StatelessWidget {
 class InputTextFild extends StatelessWidget {
   String text;
   String hintext;
+  TextEditingController? mController;
   // String labText;
-  var mValidator;
-  
+  final String? Function(String)? mValidator;
+
   InputTextFild(
       {required this.text,
       required this.hintext,
+      required this.mController,
       // required this.labText,
       this.mValidator});
 
@@ -56,6 +58,7 @@ class InputTextFild extends StatelessWidget {
               fontWeight: FontWeight.bold),
         ),
         TextFormField(
+          controller: mController,
           decoration: InputDecoration(
             hintText: hintext,
             //  labelText: 'Name *',
@@ -64,7 +67,7 @@ class InputTextFild extends StatelessWidget {
             // This optional block of code can be used to run
             // code when the user saves the form.
           },
-          validator: mValidator,
+          // validator: mValidator;
         ),
       ],
     );
